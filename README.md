@@ -1,38 +1,87 @@
 # Compressed Graph Video Query
 
-Research code for structured video querying using compressed graph representations.
+> Research repository accompanying our manuscript on structured video querying with incremental compressed graphs, submitted to **EDBT**.
 
-> **Submission status:** The associated manuscript is currently being submitted to **EDBT**. It has not been accepted. This is a submission-stage public release with selected core implementation temporarily withheld.
+## Overview
 
-## Repository contents
+Compressed Graph Video Query studies efficient spatiotemporal retrieval over tracked objects in videos. Frames are represented as graphs whose vertices describe objects and whose edges encode spatial relationships. Structured queries combine object categories, distance and orientation constraints, and temporal requirements to retrieve video intervals.
 
-- Root Python scripts: project entry points and utilities.
-- `vsimsearch/`: graph/data utilities and interfaces; core modules currently contain explicit withheld placeholders.
-- `baseline/`: local baseline integration code.
-- `supplement/`: experiment, evaluation and visualization scripts.
-- `tests/`: available research tests; tests exposing withheld internals are placeholders.
-- `figures/`: figures referenced by the local manuscript; experimental figures remain drafts.
-- `requirements.txt`: original project dependency specification.
-- `release_manifest.json`: file-level release status and SHA-256 hashes.
+## Features
 
-## Availability and execution
+- **Structured queries:** explicit specifications for single-object and multi-object conditions.
+- **Spatial relationships:** quantized distance and orientation constraints.
+- **Temporal constraints:** minimum consecutive matching frames.
+- **Research experiments:** baseline comparisons, parameter studies, evaluation utilities, and plotting scripts.
 
-See [RELEASE_SCOPE.md](RELEASE_SCOPE.md) for the precise withheld module list. **This release cannot run the complete indexing/query pipeline or fully reproduce the manuscript experiments.** Withheld modules raise `NotImplementedError` rather than silently returning fabricated results.
-
-The public scripts are research code and may require local path adjustments, separately obtained datasets and original baseline installations. The original dependency specification is provided for reference; no fresh environment installation or full reproduction has been verified for this public package.
+## Environment Setup
 
 ```bash
+git clone https://github.com/Wenmingwang11/compressed-graph-video-query.git
+cd compressed-graph-video-query
 python -m venv .venv
-# Activate the environment for your platform, then:
+```
+
+Activate the environment on your platform, then install dependencies:
+
+```bash
 python -m pip install -r requirements.txt
 ```
 
-Do not run complete indexing/query entry points until the withheld implementations are available. Dataset files, weights, private annotations and credentials are not included.
+## Project Structure
 
-## Figures and results
+```text
+compressed-graph-video-query/
+├── vsimsearch/          # Graph, data, index, and query modules
+├── baseline/            # Baseline integration
+├── supplement/          # Experiment, evaluation, and plotting utilities
+├── tests/               # Research tests
+├── requirements.txt     # Python dependencies
+└── README.md
+```
 
-Figures are provided as submission drafts. They must not be interpreted as final validated experimental results. The local manuscript figure source is recorded in the release manifest.
+## Data Format
 
-## Citation and licensing
+The multi-class tracking reader expects comma-separated records with these columns, without a header:
 
-Final bibliographic information and release licensing will be added when settled. No open-source license is granted by this initial partial release; any third-party code remains subject to its upstream terms.
+```text
+frame,id,left,top,width,height,conf,class,x,y,z
+```
+
+Each record describes one tracked object in a frame. Bounding boxes use pixel coordinates. Object identities connect observations across frames, and class identifiers specify object categories. The auxiliary `x`, `y`, and `z` fields are discarded by this reader.
+
+Configure video resolution, class mapping, frame rate, and local data paths consistently for each dataset.
+
+## Query Specification
+
+Query definitions use `QuerySpec` and `RelationConstraint` in `supplement/corrected_query_model.py`.
+
+| Field | Description |
+| --- | --- |
+| `role_types` | Required object categories for the query roles |
+| `relations` | Distance-bin intervals and orientation bins between roles |
+| `min_consecutive_frames` | Minimum consecutive matching frames |
+| `topk` | Maximum results requested in Top-k mode |
+| `theta_parts` | Orientation quantization parameter |
+| `distance_parts` | Distance quantization parameter |
+
+Spatial constraints use quantized bins. Map pixel thresholds using the same resolution and quantization settings as the index.
+
+## Experiments
+
+The `supplement/` directory organizes scripts for index statistics, query benchmarks, baseline comparisons, discretization studies, and visualization. Configure dataset paths and baseline environments for the local machine before running an experiment.
+
+Evaluation should state query definitions, data scope, annotation source, result granularity, and matching rules. For clip-level precision and recall, predicted and reference intervals can be matched one-to-one under a specified temporal intersection-over-union threshold.
+
+## Notes
+
+- Obtain datasets from their original providers and follow applicable usage terms.
+- Keep frame numbering, coordinate conventions, and sampling rates consistent.
+- Install external baseline systems according to their upstream instructions.
+
+## Citation
+
+If you use this work, please cite the associated manuscript submitted to EDBT. Final bibliographic information will be added when available.
+
+## Contact
+
+For questions and suggestions, please open an issue in this repository.
