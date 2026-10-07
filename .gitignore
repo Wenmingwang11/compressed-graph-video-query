@@ -1,0 +1,4 @@
+# This initial release is documentation-only. Explicitly allow reviewed files.
+*
+!.gitignore
+!README.md
