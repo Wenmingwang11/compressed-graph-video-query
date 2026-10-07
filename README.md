@@ -6,13 +6,6 @@
 
 Compressed Graph Video Query studies efficient spatiotemporal retrieval over tracked objects in videos. Frames are represented as graphs whose vertices describe objects and whose edges encode spatial relationships. Structured queries combine object categories, distance and orientation constraints, and temporal requirements to retrieve video intervals.
 
-## Features
-
-- **Structured queries:** explicit specifications for single-object and multi-object conditions.
-- **Spatial relationships:** quantized distance and orientation constraints.
-- **Temporal constraints:** minimum consecutive matching frames.
-- **Research experiments:** baseline comparisons, parameter studies, evaluation utilities, and plotting scripts.
-
 ## Environment Setup
 
 ```bash
@@ -71,12 +64,6 @@ Spatial constraints use quantized bins. Map pixel thresholds using the same reso
 The `supplement/` directory organizes scripts for index statistics, query benchmarks, baseline comparisons, discretization studies, and visualization. Configure dataset paths and baseline environments for the local machine before running an experiment.
 
 Evaluation should state query definitions, data scope, annotation source, result granularity, and matching rules. For clip-level precision and recall, predicted and reference intervals can be matched one-to-one under a specified temporal intersection-over-union threshold.
-
-## Notes
-
-- Obtain datasets from their original providers and follow applicable usage terms.
-- Keep frame numbering, coordinate conventions, and sampling rates consistent.
-- Install external baseline systems according to their upstream instructions.
 
 ## Citation
 
