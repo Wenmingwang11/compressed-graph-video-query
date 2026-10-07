@@ -1,35 +1,38 @@
 # Compressed Graph Video Query
 
-Research repository for structured video querying using compressed graph representations.
+Research code for structured video querying using compressed graph representations.
 
-## Project status
+> **Submission status:** The associated manuscript is currently being submitted to **EDBT**. It has not been accepted. This is a submission-stage public release with selected core implementation temporarily withheld.
 
-This repository is under preparation. The manuscript and experiments are being finalized. This initial public release contains project documentation only; it does not yet provide a runnable implementation or a complete experimental reproduction package.
+## Repository contents
 
-The core implementation, validated experimental results, and reproduction instructions will be considered for a future release. No release date is currently committed.
+- Root Python scripts: project entry points and utilities.
+- `vsimsearch/`: graph/data utilities and interfaces; core modules currently contain explicit withheld placeholders.
+- `baseline/`: local baseline integration code.
+- `supplement/`: experiment, evaluation and visualization scripts.
+- `tests/`: available research tests; tests exposing withheld internals are placeholders.
+- `figures/`: figures referenced by the local manuscript; experimental figures remain drafts.
+- `requirements.txt`: original project dependency specification.
+- `release_manifest.json`: file-level release status and SHA-256 hashes.
 
-## Method overview
+## Availability and execution
 
-The project studies video retrieval from tracked object records using object categories, quantized spatial relationships, and temporal constraints. A query specifies the required objects and relationships, and retrieval produces qualifying video intervals.
+See [RELEASE_SCOPE.md](RELEASE_SCOPE.md) for the precise withheld module list. **This release cannot run the complete indexing/query pipeline or fully reproduce the manuscript experiments.** Withheld modules raise `NotImplementedError` rather than silently returning fabricated results.
 
-## Public release scope
+The public scripts are research code and may require local path adjustments, separately obtained datasets and original baseline installations. The original dependency specification is provided for reference; no fresh environment installation or full reproduction has been verified for this public package.
 
-Currently available:
+```bash
+python -m venv .venv
+# Activate the environment for your platform, then:
+python -m pip install -r requirements.txt
+```
 
-- Project overview and release status.
-- A description of which materials are withheld from this initial release.
+Do not run complete indexing/query entry points until the withheld implementations are available. Dataset files, weights, private annotations and credentials are not included.
 
-Currently withheld:
+## Figures and results
 
-- Core graph compression and index construction implementations.
-- Candidate pruning and query execution implementations.
-- Local experimental adapters, intermediate results, and unvalidated measurements.
-- Source videos, tracking records, and annotation files.
+Figures are provided as submission drafts. They must not be interpreted as final validated experimental results. The local manuscript figure source is recorded in the release manifest.
 
-## Reproducibility
+## Citation and licensing
 
-This documentation-only release cannot reproduce the experiments. Environment specifications, executable examples, data access instructions, and evaluation protocols must accompany a future runnable release.
-
-## Citation and license
-
-Bibliographic information and licensing terms will be added when finalized. This repository currently grants no open-source license for the withheld implementation or third-party assets.
+Final bibliographic information and release licensing will be added when settled. No open-source license is granted by this initial partial release; any third-party code remains subject to its upstream terms.

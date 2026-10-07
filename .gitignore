@@ -1,4 +1,15 @@
-# This initial release is documentation-only. Explicitly allow reviewed files.
-*
-!.gitignore
-!README.md
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+.idea/
+.vscode/
+storage/
+outputs/
+*.pkl
+*.pt
+*.pth
+*.mp4
+*.avi
+*.log
