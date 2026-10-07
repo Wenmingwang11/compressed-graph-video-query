@@ -26,7 +26,6 @@ python -m pip install -r requirements.txt
 compressed-graph-video-query/
 ├── vsimsearch/          # Graph, data, index, and query modules
 ├── tests/               # Index and query tests
-├── cp_graph.py          # Compressed graph module
 ├── prefix_tree.py       # Prefix tree module
 ├── Tree_Node.py         # Tree node module
 ├── FPgrowth.py          # Frequent pattern mining module
